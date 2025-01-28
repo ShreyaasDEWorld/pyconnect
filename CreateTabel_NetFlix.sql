@@ -1,24 +1,24 @@
--- Table: dbtraw.netflix_titles
 
--- DROP TABLE IF EXISTS dbtraw.netflix_titles;
+	CREATE TABLE dbtraw.netflix_raw (
+    show_id VARCHAR(10) PRIMARY KEY,
+    type VARCHAR(10) NULL,
+    title VARCHAR(200) NULL,
+    director VARCHAR(250) NULL,
+    "cast" VARCHAR(1000) NULL,  -- Using quotes to escape 'cast'
+    country VARCHAR(150) NULL,
+    date_added VARCHAR(20) NULL,
+    release_year INTEGER NULL,
+    rating VARCHAR(10) NULL,
+    duration VARCHAR(10) NULL,
+    listed_in VARCHAR(100) NULL,
+    description VARCHAR(500) NULL
+);
 
-CREATE TABLE IF NOT EXISTS dbtraw.netflix_titles
-(
-    show_id integer,
-    type text COLLATE pg_catalog."default",
-    title text COLLATE pg_catalog."default",
-    director text COLLATE pg_catalog."default",
-    "cast" text COLLATE pg_catalog."default",
-    country text COLLATE pg_catalog."default",
-    date_added text COLLATE pg_catalog."default",
-    release_year integer,
-    rating text COLLATE pg_catalog."default",
-    duration text COLLATE pg_catalog."default",
-    listed_in text COLLATE pg_catalog."default",
-    description text COLLATE pg_catalog."default"
-)
+COPY dbtraw.netflix_raw (show_id, type, title, director, "cast", country, date_added, release_year, rating, duration, listed_in, description)
+FROM 'D:\Net\datatest.csv'
+DELIMITER ',' 
+CSV HEADER 
+QUOTE '"';
 
-TABLESPACE pg_default;
 
-ALTER TABLE IF EXISTS dbtraw.netflix_titles
-    OWNER to postgres;
+ 
